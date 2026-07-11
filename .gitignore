@@ -1,0 +1,4 @@
+node_modules/
+.next/
+*.log
+output_review_file.html

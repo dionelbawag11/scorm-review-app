@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Annotate Debug</title></head>
+<body>
+<pre id="log" style="font:13px monospace;padding:20px;background:#f5f5f5;white-space:pre-wrap"></pre>
+<script>
+function log(msg) {
+  document.getElementById('log').textContent += msg + '\n';
+  console.log(msg);
+}
+
+log('=== Annotate Debug ===');
+log('Location: ' + location.href);
+log('Protocol: ' + location.protocol);
+log('');
+
+// Test 1: Can we fetch html2canvas from CDN?
+log('Test 1: Loading html2canvas from CDN...');
+var h2c = document.createElement('script');
+h2c.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+h2c.onload = function() {
+  log('  CDN html2canvas: LOADED OK - window.html2canvas = ' + typeof window.html2canvas);
+  runTest2();
+};
+h2c.onerror = function(e) {
+  log('  CDN html2canvas: FAILED (blocked by browser - this is the bug!)');
+  log('  Error: ' + JSON.stringify(e.type));
+  runTest2();
+};
+document.head.appendChild(h2c);
+
+function runTest2() {
+  log('');
+  // Test 2: Can we load coreview.js?
+  log('Test 2: Loading coreview.js...');
+  window.AnnotateConfig = {
+    project: 'debug-test',
+    note: 'debug',
+    startOpen: false,
+    theme: 'light'
+  };
+  var ann = document.createElement('script');
+  ann.src = './coreview.js';
+  ann.onload = function() {
+    log('  coreview.js: LOADED OK');
+    runTest3();
+  };
+  ann.onerror = function() {
+    log('  coreview.js: FAILED to load');
+  };
+  document.head.appendChild(ann);
+}
+
+function runTest3() {
+  log('');
+  log('Test 3: Check annotate UI visible in DOM...');
+  setTimeout(function() {
+    var root = document.getElementById('__an_root') || document.getElementById('__an_launch') || document.getElementById('__an_bar');
+    log('  Annotate root element: ' + (root ? 'FOUND - ' + root.id : 'NOT FOUND'));
+
+    log('');
+    log('Test 4: Simulate rectangle draw + captureRegionScreenshot...');
+    log('  window.html2canvas after annotate load: ' + typeof window.html2canvas);
+
+    // Check if annotate internal state is accessible
+    var h2cScript = document.getElementById('__an_h2c_script');
+    log('  __an_h2c_script tag in DOM: ' + (h2cScript ? 'YES src=' + h2cScript.src : 'NO'));
+
+    log('');
+    log('=== SUMMARY ===');
+    log('If html2canvas CDN failed above -> screenshot will never work (CORS/file:// block)');
+    log('If annotate root not found -> coreview.js did not initialize');
+  }, 1500);
+}
+</script>
+</body>
+</html>
