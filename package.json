@@ -1,0 +1,19 @@
+{
+  "name": "scorm-review-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --ignore-glob='**/demo-for-boss*'",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "demo": "npx playwright test tests/demo-for-boss.spec.ts --headed --project=chromium",
+    "qa": "node qa-tool/qa.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

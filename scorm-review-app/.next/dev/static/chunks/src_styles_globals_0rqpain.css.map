@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/oniesenpai/Desktop/scorm-review-app/scorm-review-app/src/styles/globals.css"],"sourcesContent":["* {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\nhtml,\nbody {\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,\n    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n  background: #0f0f13;\n  color: #f0f0f0;\n  min-height: 100vh;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA"}}]
+}
