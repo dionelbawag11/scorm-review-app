@@ -1,0 +1,4 @@
+node_modules/
+_qa_screenshots/
+*_qa_tmp/
+QA-Report-*.html

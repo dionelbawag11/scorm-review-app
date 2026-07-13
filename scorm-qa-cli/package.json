@@ -1,0 +1,32 @@
+{
+  "name": "scorm-qa",
+  "version": "1.0.0",
+  "description": "Automated QA tool for SCORM packages — runs 7 checks and generates a bug report",
+  "main": "src/qa.js",
+  "bin": {
+    "scorm-qa": "src/qa.js"
+  },
+  "scripts": {
+    "postinstall": "node src/install-browsers.js"
+  },
+  "keywords": [
+    "scorm",
+    "elearning",
+    "qa",
+    "testing",
+    "playwright",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "playwright": "1.44.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src"
+  ]
+}
